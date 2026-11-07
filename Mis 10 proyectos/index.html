@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laboratorio JS - 10 Prácticas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Contenedor Principal en Grid -->
+  <div class="app-container">
+    
+    <!-- Menú Lateral de Proyectos -->
+    <aside class="sidebar">
+      <h2>Prácticas JS</h2>
+      <ul class="menu-list">
+        <li><button class="menu-btn active" onclick="verSeccion('sec-1', this)">1. Contador</button></li>
+        <li><button class="menu-btn" onclick="verSeccion('sec-2', this)">2. Tareas</button></li>
+        <li><button class="menu-btn" onclick="verSeccion('sec-3', this)">3. Adivina el Número</button></li>
+        <li><button class="menu-btn" onclick="verSeccion('sec-4', this)">4. Calculadora</button></li>
+        <li><button class="menu-btn" onclick="verSeccion('sec-5', this)">5. Colores Hex</button></li>
+        <li><button class="menu-btn" onclick="verSeccion('sec-6', this)">6. Temporizador</button></li>
+        <li><button class="menu-btn" onclick="verSeccion('sec-7', this)">7. Claves</button></li>
+        <li><button class="menu-btn" onclick="verSeccion('sec-8', this)">8. Modo Oscuro</button></li>
+        <li><button class="menu-btn" onclick="verSeccion('sec-9', this)">9. PPT Game</button></li>
+        <li><button class="menu-btn" onclick="verSeccion('sec-10', this)">10. Galería</button></li>
+      </ul>
+    </aside>
+
+    <!-- Área de Visualización -->
+    <main class="content-area">
+      <header class="top-bar">
+        <h1>Portafolio de JavaScript (2026)</h1>
+      </header>
+
+      <div class="projects-wrapper">
+
+        <!-- Proyecto 1 -->
+        <section id="sec-1" class="box-card active-box">
+          <h3>Proyecto 1: Contador Inteligente</h3>
+          <div class="counter-box">
+            <span id="num-display">0</span>
+          </div>
+          <div class="btn-row">
+            <button class="btn-custom btn-red" onclick="modificarSuma(-1)">-1</button>
+            <button class="btn-custom btn-gray" onclick="modificarSuma(0)">Reiniciar</button>
+            <button class="btn-custom btn-green" onclick="modificarSuma(1)">+1</button>
+          </div>
+        </section>
+
+        <!-- Proyecto 2 -->
+        <section id="sec-2" class="box-card">
+          <h3>Proyecto 2: Lista de Tareas</h3>
+          <div class="input-row">
+            <input type="text" id="campo-tarea" placeholder="Nueva tarea...">
+            <button class="btn-custom btn-teal" onclick="anadirPendiente()">Añadir</button>
+          </div>
+          <ul id="lista-pendientes" class="custom-list"></ul>
+        </section>
+
+        <!-- Proyecto 3 -->
+        <section id="sec-3" class="box-card">
+          <h3>Proyecto 3: Adivina el Número (1-100)</h3>
+          <p>Escribe un número e intenta adivinar el secreto:</p>
+          <div class="input-row">
+            <input type="number" id="input-secreto" min="1" max="100" placeholder="Ej: 45">
+            <button class="btn-custom btn-teal" onclick="chequearNumero()">Probar</button>
+          </div>
+          <p id="aviso-juego" class="info-text"></p>
+          <p>Intentos: <span id="contador-intentos">0</span></p>
+          <button class="btn-custom btn-gray" onclick="reiniciarAdivina()">Nuevo juego</button>
+        </section>
+
+        <!-- Proyecto 4 -->
+        <section id="sec-4" class="box-card">
+          <h3>Proyecto 4: Calculadora Básica</h3>
+          <div class="calc-box">
+            <input type="text" id="visor-calc" readonly value="0">
+            <div class="calc-grid">
+              <button onclick="teclear('7')">7</button>
+              <button onclick="teclear('8')">8</button>
+              <button onclick="teclear('9')">9</button>
+              <button onclick="teclear('+')">+</button>
+              <button onclick="teclear('4')">4</button>
+              <button onclick="teclear('5')">5</button>
+              <button onclick="teclear('6')">6</button>
+              <button onclick="teclear('-')">-</button>
+              <button onclick="teclear('1')">1</button>
+              <button onclick="teclear('2')">2</button>
+              <button onclick="teclear('3')">3</button>
+              <button onclick="teclear('*')">*</button>
+              <button onclick="limpiarCalc()">C</button>
+              <button onclick="teclear('0')">0</button>
+              <button onclick="resolverCalc()">=</button>
+              <button onclick="teclear('/')">/</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Proyecto 5 -->
+        <section id="sec-5" class="box-card">
+          <h3>Proyecto 5: Cambiador de Colores Aleatorios</h3>
+          <div class="color-preview-box">
+            <h4 id="codigo-hex-texto">#0F766E</h4>
+            <div class="btn-row">
+              <button class="btn-custom btn-teal" onclick="girarColor()">Cambiar Color</button>
+              <button class="btn-custom btn-gray" onclick="copiarHex()">Copiar Código</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Proyecto 6 -->
+        <section id="sec-6" class="box-card">
+          <h3>Proyecto 6: Temporizador</h3>
+          <div class="input-row">
+            <label>Min: <input type="number" id="input-min" value="0" style="width:50px"></label>
+            <label>Seg: <input type="number" id="input-seg" value="10" style="width:50px"></label>
+          </div>
+          <div class="timer-view" id="reloj-display">00:10</div>
+          <div class="btn-row">
+            <button class="btn-custom btn-green" onclick="arrancarReloj()">Iniciar</button>
+            <button class="btn-custom btn-gray" onclick="pausarReloj()">Pausar</button>
+            <button class="btn-custom btn-red" onclick="resetReloj()">Reiniciar</button>
+          </div>
+          <p id="alerta-tiempo" class="info-text"></p>
+        </section>
+
+        <!-- Proyecto 7 -->
+        <section id="sec-7" class="box-card">
+          <h3>Proyecto 7: Generador de Contraseñas</h3>
+          <div class="input-row">
+            <input type="text" id="input-pass-gen" readonly placeholder="Tu clave segura">
+            <button class="btn-custom btn-gray" onclick="copiarPass()">Copiar</button>
+          </div>
+          <div class="input-row" style="margin-top:10px">
+            <label>Longitud (6-20): <input type="number" id="pass-largo" value="10" min="6" max="20" style="width:60px"></label>
+          </div>
+          <button class="btn-custom btn-teal" onclick="fabricarClave()" style="margin-top:10px; width:100%">Generar Contraseña</button>
+        </section>
+
+        <!-- Proyecto 8 -->
+        <section id="sec-8" class="box-card">
+          <h3>Proyecto 8: Modo Oscuro / Claro</h3>
+          <p>Alterna el diseño visual general de la aplicación:</p>
+          <button class="btn-custom btn-teal" onclick="conmutarTema()" style="margin-top: 15px;">Cambiar Tema Visual</button>
+        </section>
+
+        <!-- Proyecto 9 -->
+        <section id="sec-9" class="box-card">
+          <h3>Proyecto 9: Piedra, Papel o Tijera</h3>
+          <div class="scoreboard">
+            <span>Tú: <span id="pts-user">0</span></span> | 
+            <span>PC: <span id="pts-pc">0</span></span>
+          </div>
+          <div class="btn-row" style="margin: 15px 0;">
+            <button class="btn-custom btn-teal" onclick="enfrentarPPT('Piedra')">✊ Piedra</button>
+            <button class="btn-custom btn-teal" onclick="enfrentarPPT('Papel')">✋ Papel</button>
+            <button class="btn-custom btn-teal" onclick="enfrentarPPT('Tijera')">✌️ Tijera</button>
+          </div>
+          <p id="resultado-ppt" style="font-weight: bold;"></p>
+          <button class="btn-custom btn-gray" onclick="resetPPT()" style="margin-top:10px">Reiniciar Marcador</button>
+        </section>
+
+        <!-- Proyecto 10 -->
+        <section id="sec-10" class="box-card">
+          <h3>Proyecto 10: Galería con Filtros</h3>
+          <div class="input-row">
+            <input type="text" id="buscador-galeria" placeholder="Buscar imagen..." oninput="filtrarFotos()">
+          </div>
+          <div class="btn-row" style="margin: 10px 0;">
+            <button class="btn-custom btn-gray" onclick="categoriaFoto('todas')">Todas</button>
+            <button class="btn-custom btn-gray" onclick="categoriaFoto('animal')">Animales</button>
+            <button class="btn-custom btn-gray" onclick="categoriaFoto('tec')">Tecnología</button>
+          </div>
+          <div class="gallery-grid">
+            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=200" data-cat="animal" alt="Gato">
+            <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=200" data-cat="animal" alt="Perro">
+            <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=200" data-cat="tec" alt="Laptop">
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=200" data-cat="tec" alt="Codigo">
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
